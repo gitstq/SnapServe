@@ -1,0 +1,66 @@
+# SnapServe - Lightweight Self-Hosted Web Screenshot & PDF API Service
+# Zero external dependencies (no PostgreSQL/Redis required), pure Python + Playwright
+
+[project]
+name = "snapserve"
+version = "1.0.0"
+description = "Lightweight self-hosted web screenshot, PDF generation & OG image API service"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "gitstq"}
+]
+keywords = ["screenshot", "pdf", "og-image", "playwright", "api", "self-hosted"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Multimedia :: Graphics :: Capture",
+]
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "playwright>=1.40.0",
+    "aiosqlite>=0.19.0",
+    "pydantic>=2.5.0",
+    "jinja2>=3.1.0",
+    "aiofiles>=23.2.0",
+    "Pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "httpx>=0.25.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+snapserve = "snapserve.cli:main"
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["snapserve*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
